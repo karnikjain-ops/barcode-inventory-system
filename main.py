@@ -15,7 +15,7 @@ match do :
     case "remove" | "sell":
         code = scanner()
         remove_items(code)
-    case "detailing":
+    case "data":
         code = scanner()
         give_details(code)
 
