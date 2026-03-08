@@ -1,32 +1,30 @@
 import cv2
 from pyzbar.pyzbar import decode
+def scanner():
+    video = cv2.VideoCapture(0)
+    video.set(cv2.CAP_PROP_FRAME_WIDTH, 1080)
+    video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1920)
 
-video = cv2.VideoCapture(0)
-bit =0
-video.set(cv2.CAP_PROP_FRAME_WIDTH, 1080)
-video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1920)
+    while True:
+        ret, frame = video.read()
 
-while True:
-    ret, frame = video.read()
+        if not ret:
+            print("Camera frame not received")
+            break
 
-    if not ret:
-        print("Camera frame not received")
-        break
+        cv2.imshow("frame", frame)
 
-    cv2.imshow("frame", frame)
+        number = decode(frame)
 
-    numer = decode(frame)
-
-    if numer:
-        first_barcode_data = numer[0].data.decode("utf-8")
-        print(first_barcode_data)
-        bit=bit+1
-        print(bit)
+        if number:
+            first_barcode_data = number[0].data.decode("utf-8")
+            return first_barcode_data
 
 
 
-    if cv2.waitKey(1) & 0xFF == ord('s'):
-        break
 
-video.release()
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) & 0xFF == ord('s'):
+            break
+
+    video.release()
+    cv2.destroyAllWindows()
