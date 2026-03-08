@@ -7,6 +7,7 @@ with open("inventory.json","r") as f:
 def add_item(code):
     if code in inventory:
         inventory[code]["quantity"] = int(inventory[code]["quantity"]) + 1
+        print("new quantity after add/buy")
         print (inventory[code]["quantity"])
         with open("inventory.json","w") as f:
             json.dump(inventory,f,indent=4)
@@ -22,6 +23,7 @@ def add_item(code):
 def remove_items(code):
     if code in inventory:
         inventory[code]["quantity"] = int(inventory[code]["quantity"]) - 1
+        print("quantity left after sell/remove")
         print(inventory[code]["quantity"])
         with open("inventory.json", "w") as f:
             json.dump(inventory, f, indent=4)
