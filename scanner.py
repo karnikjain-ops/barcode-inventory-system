@@ -18,6 +18,8 @@ def scanner():
 
         if number:
             first_barcode_data = number[0].data.decode("utf-8")
+            video.release()
+            cv2.destroyAllWindows()
             return first_barcode_data
 
 
