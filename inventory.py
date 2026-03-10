@@ -17,7 +17,10 @@ def add_item(code):
             "name" : input("What is the name?"),
             "quantity" : int(input("What is the quantity?")),
             "price" : int(input("What is the price?")),
+
         }
+        with open("inventory.json","w") as f:
+            json.dump(inventory,f,indent=4)
 
 
 def remove_items(code):
